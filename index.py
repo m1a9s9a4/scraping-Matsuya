@@ -33,7 +33,6 @@ row_number = 2
 for links in all_menu_links:
     # 大メニュー
     menu_name = links.find(class_="txt").text
-    updateSheet('A', row_number, menu_name)
     print('scrapping: ' + menu_name)
 
     time.sleep(1)
@@ -53,7 +52,6 @@ for links in all_menu_links:
         food_soup = BeautifulSoup(food_page.text, 'html.parser')
         # メニュー名
         food_title = food_soup.find('h1').text
-        updateSheet('B', row_number, food_title)
         print(food_title)
 
         food_nourishment_ul = food_soup.find(class_="nourishment")
@@ -64,6 +62,8 @@ for links in all_menu_links:
             try:
                 food_type = food_nourishment.find('h3').text
                 print(food_type)
+                updateSheet('A', row_number, menu_name)
+                updateSheet('B', row_number, food_title)
                 updateSheet('C', row_number, food_type)
             except:
                 print("量なし")
